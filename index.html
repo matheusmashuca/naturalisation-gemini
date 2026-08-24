@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réussir sa Naturalisation Française</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="flag">🇫🇷</span>
+        <h2>Réussir sa Naturalisation</h2>
+      </div>
+      <nav class="menu">
+        <button class="nav-btn active" onclick="switchTab('dashboard')"><span class="icon">📊</span> Dashboard</button>
+        <button class="nav-btn" onclick="switchTab('modules')"><span class="icon">📚</span> Modules & Cours</button>
+        <button class="nav-btn" onclick="switchTab('quiz-bank')"><span class="icon">📝</span> Banque de Questions</button>
+        <button class="nav-btn" onclick="switchTab('flashcards')"><span class="icon">🎴</span> Flashcards</button>
+        <button class="nav-btn" onclick="switchTab('interview')"><span class="icon">🎙️</span> Simulateur d'Entretien</button>
+        <button class="nav-btn" onclick="switchTab('checklist')"><span class="icon">📄</span> Checklist & Dossier</button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile"><span class="avatar">👤</span><span>Apprenant</span></div>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Changer le thème">🌓</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="top-bar">
+        <div class="search-box">
+          <input type="text" id="global-search" placeholder="Rechercher (ex: Napoléon, Laïcité...)">
+        </div>
+        <div class="quick-actions">
+          <button class="btn btn-warning" onclick="startEveMode()">⭐ Mode Veille d'Entretien</button>
+        </div>
+      </header>
+
+      <section id="view-dashboard" class="tab-view active">
+        <div class="welcome-card">
+          <h1>Préparez votre entretien en 15 min par jour</h1>
+          <p>Progression globale du programme</p>
+          <div class="progress-bar-container"><div class="progress-bar" id="global-progress-bar" style="width: 0%"></div></div>
+          <span id="global-progress-text">0% complété</span>
+        </div>
+        <div class="dashboard-grid">
+          <div class="card">
+            <h3>🎯 Objectif du jour</h3>
+            <p>Complétez votre session quotidienne de 15 minutes.</p>
+            <button class="btn btn-primary btn-block" onclick="switchTab('modules')">Commencer la session</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-modules" class="tab-view">
+        <h2>Modules de formation</h2>
+        <div id="modules-list" class="modules-container"></div>
+      </section>
+
+      <section id="view-lesson" class="tab-view">
+        <button class="btn btn-secondary" onclick="switchTab('modules')">← Retour aux modules</button>
+        <div id="lesson-content-container" style="margin-top:1rem;"></div>
+      </section>
+
+      <section id="view-flashcards" class="tab-view">
+        <h2>Révision par Flashcards (SRS)</h2>
+        <div class="flashcard-wrapper">
+          <div id="flashcard" class="flashcard" onclick="flipCard()">
+            <div class="flashcard-front" id="card-front">Cliquez pour commencer</div>
+            <div class="flashcard-back" id="card-back">Réponse ici</div>
+          </div>
+          <div class="flashcard-controls" style="margin-top:1rem; display:flex; gap:1rem;">
+            <button class="btn btn-danger" onclick="answerCard(false)">À revoir ❌</button>
+            <button class="btn btn-success" onclick="answerCard(true)">Mémorisé ✅</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-interview" class="tab-view">
+        <h2>Simulateur d'Entretien</h2>
+        <div class="card interview-card">
+          <div class="speech-bubble" id="interview-question">Bonjour. Pourquoi souhaitez-vous devenir Français ?</div>
+          <button class="btn btn-secondary" onclick="speakCurrentQuestion()">🔊 Écouter la question</button>
+          <div style="margin-top: 1rem;">
+            <textarea id="user-interview-answer" placeholder="Formulez votre réponse ici..."></textarea>
+            <button class="btn btn-primary" onclick="revealInterviewAnswer()">Afficher la réponse idéale</button>
+          </div>
+          <div id="ideal-answer-box" class="card hidden" style="margin-top: 1rem;">
+            <h4>Exemple de réponse idéale :</h4>
+            <p id="ideal-answer-text"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-checklist" class="tab-view">
+        <h2>Checklist du Dossier de Naturalisation</h2>
+        <div class="card">
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:0.75rem;">
+            <li><label><input type="checkbox"> Formulaire Cerfa n°12753*02 rempli et signé</label></li>
+            <li><label><input type="checkbox"> Timbre fiscal électronique (55 €)</label></li>
+            <li><label><input type="checkbox"> Copie intégrale de l'acte de naissance</label></li>
+            <li><label><input type="checkbox"> Justificatif de domicile récent (-3 mois)</label></li>
+            <li><label><input type="checkbox"> Attestation de niveau linguistique B1 / B2</label></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
